@@ -18,6 +18,9 @@ public class Percolation {
 
     // create n x n grid, with all sites blocked
     public Percolation(int n){
+        if(n < 1){
+            throw new IllegalArgumentException();
+        }
         this.n = n;
         this.size = n * n + 2;
         this.uf = new WeightedQuickUnionUF(size);
@@ -113,6 +116,10 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates(){
+        if(n == 1){
+            return open[1] == 1;
+        }
+
         return uf.connected(0, size - 1);
     }
 
@@ -130,6 +137,7 @@ public class Percolation {
 
     // test client
     public static void main(String[] args){
-
+        Percolation p = new Percolation(1);
+        p.percolates();
     }
 }
