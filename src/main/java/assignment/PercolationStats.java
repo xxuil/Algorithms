@@ -1,5 +1,11 @@
 package main.java.assignment;
 
+/**
+ * PercolationStats
+ * Xiangxing Liu
+ * 01/04/2019
+ * Coursera Algorithms, Part I, Assignment 1
+ */
 public class PercolationStats {
     // perform trials independent experiments on an n-by-n grid
     public PercolationStats(int n, int trials){
@@ -28,6 +34,8 @@ public class PercolationStats {
 
     // test client (described below)
     public static void main(String[] args){
+        int n = Integer.parseInt(args[0]);
+        int T = Integer.parseInt(args[1]);
 
     }
 }
