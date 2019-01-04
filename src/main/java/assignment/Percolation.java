@@ -1,6 +1,6 @@
 package main.java.assignment;
 
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
  * Percolation
@@ -29,11 +29,11 @@ public class Percolation {
         }
 
         for(int i = 1; i < n + 1; i++){
-            uf.union(i,0);
+            uf.union(0,i);
         }
 
         for(int i = (size - n - 1); i < size - 1; i++){
-            uf.union(i, size - 1);
+            uf.union(size - 1, i);
         }
     }
 
@@ -41,33 +41,44 @@ public class Percolation {
     public void open(int row, int col){
         // 1. open the site
         int index = convert(row, col);
-        if(open[index] == 0)
+        if(open[index] == 0) {
             open[index] = 1;
+            openCount += 1;
+        }
 
         // 2. check its neighbors
         // They are, index +- 1 and index +- n
         // 3. connect open neighbors
-        if(index - 1 > 0){
-            if(isOpen(index - 1)){
-                uf.union(index, index - 1);
+        int temp;
+        if(col != 1){
+            temp = index - 1;
+            if(temp > 0){
+                if(isOpen(temp)){
+                    uf.union(index, temp);
+                }
             }
         }
 
-        if(index + 1 < size - 1){
-            if(isOpen(index + 1)){
-                uf.union(index, index + 1);
+        if(col != n){
+            temp = index + 1;
+            if(temp < size - 1){
+                if(isOpen(temp)){
+                    uf.union(index, temp);
+                }
             }
         }
 
-        if(index - n > 0){
-            if(isOpen(index - n)){
-                uf.union(index, index - n);
+        temp = index - n;
+        if(temp > 0){
+            if(isOpen(temp)){
+                uf.union(index, temp);
             }
         }
 
-        if(index + n > size - 1){
-            if(isOpen(index + n)){
-                uf.union(index, index + n);
+        temp = index + n;
+        if(temp < size - 1){
+            if(isOpen(temp)){
+                uf.union(index, temp);
             }
         }
     }
@@ -85,7 +96,14 @@ public class Percolation {
     // is site full?
     public boolean isFull(int row, int col){
         int index = convert(row, col);
-        return open[index] == 0;
+        boolean flag = false;
+        if(open[index] == 1){
+            int root = uf.find(index);
+            if(root == uf.find(0)){
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     // number of open sites
@@ -107,7 +125,7 @@ public class Percolation {
         if((col < 1)||(col > n)){
             throw new IllegalArgumentException();
         }
-        return -1;
+        return ((row - 1) * n) + col;
     }
 
     // test client
