@@ -1,4 +1,4 @@
-package main.java.assignment;
+package main.java.assignment.percolation;
 
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdStats;

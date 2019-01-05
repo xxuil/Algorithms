@@ -1,4 +1,4 @@
-package main.java.assignment;
+package main.java.assignment.percolation;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -89,24 +89,23 @@ public class Percolation {
     // is site open?
     public boolean isOpen(int row, int col){
         int index = convert(row, col);
-        return open[index] == 1;
+        return !(open[index] == 0);
     }
 
     private boolean isOpen(int index){
-        return open[index] == 1;
+        return !(open[index] == 0);
     }
 
     // is site full?
     public boolean isFull(int row, int col){
         int index = convert(row, col);
-        boolean flag = false;
-        if(open[index] == 1){
-            int root = uf.find(index);
-            if(root == uf.find(0)){
-                flag = true;
+        boolean ret = false;
+        if(isOpen(index)){
+            if(open[index] == 2 || open[index] == 4){
+                ret = true;
             }
         }
-        return flag;
+        return ret;
     }
 
     // number of open sites
