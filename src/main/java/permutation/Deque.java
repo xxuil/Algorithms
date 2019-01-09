@@ -3,13 +3,13 @@ package main.java.permutation;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque<E> implements Iterable<E> {
-    int n;
-    Node first;
-    Node last;
+public class Deque<Item> implements Iterable<Item> {
+    private int n;
+    private Node first;
+    private Node last;
 
     private class Node{
-        E obj;
+        Item obj;
         Node next;
         Node prev;
     }
@@ -29,7 +29,7 @@ public class Deque<E> implements Iterable<E> {
         return n;
     }
 
-    public void addFirst(E item){
+    public void addFirst(Item item){
         if(item == null)
             throw new IllegalArgumentException();
         Node temp = new Node();
@@ -47,7 +47,7 @@ public class Deque<E> implements Iterable<E> {
         n += 1;
     }
 
-    public void addLast(E item){
+    public void addLast(Item item){
         if(item == null)
             throw new IllegalArgumentException();
         Node temp = new Node();
@@ -65,14 +65,14 @@ public class Deque<E> implements Iterable<E> {
         n += 1;
     }
 
-    public E removeFirst(){
+    public Item removeFirst(){
 //        Node temp = first;
-//        E ret = temp.obj;
+//        Item ret = temp.obj;
 //        temp.next.prev = null;
 //        first = temp.prev;
 //        temp = null;
         if(n > 0){
-            E ret = first.obj;
+            Item ret = first.obj;
             first = first.next;
             if(n == 1){
                 last = null;
@@ -86,14 +86,14 @@ public class Deque<E> implements Iterable<E> {
         }
     }
 
-    public E removeLast(){
+    public Item removeLast(){
 //        Node temp = last;
-//        E ret = temp.obj;
+//        Item ret = temp.obj;
 //        temp.prev.next = null;
 //        last = temp.prev;
 //        temp = null;
         if(n > 0){
-            E ret = last.obj;
+            Item ret = last.obj;
             last = last.prev;
 
             if(n == 1){
@@ -109,11 +109,11 @@ public class Deque<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator<Item> iterator() {
         return new DequeIterator();
     }
 
-    private class DequeIterator implements Iterator<E> {
+    private class DequeIterator implements Iterator<Item> {
         private Node current = first;
 
         @Override
@@ -122,10 +122,10 @@ public class Deque<E> implements Iterable<E> {
         }
 
         @Override
-        public E next() {
+        public Item next() {
             if(!hasNext())
                 throw new NoSuchElementException();
-            E ret = current.obj;
+            Item ret = current.obj;
             current = current.next;
             return ret;
         }

@@ -5,13 +5,13 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RandomizedQueue <E> implements Iterable<E> {
+public class RandomizedQueue <Item> implements Iterable<Item> {
     private int n;
-    private E[] objs;
+    private Item[] objs;
 
     public RandomizedQueue(){
         n = 0;
-        objs = (E[]) new Object[1];
+        objs = (Item[]) new Object[1];
     }
 
     public boolean isEmpty(){
@@ -30,14 +30,14 @@ public class RandomizedQueue <E> implements Iterable<E> {
             max = objs.length / 2;
         }
 
-        E[] temp = (E[]) new Object[max];
+        Item[] temp = (Item[]) new Object[max];
         for(int i = 0; i < n; i ++){
             temp[i] = objs[i];
         }
         objs = temp;
     }
 
-    public void enqueue(E item){
+    public void enqueue(Item item){
         if(item == null)
             throw new IllegalArgumentException();
         if(n == objs.length)
@@ -47,8 +47,8 @@ public class RandomizedQueue <E> implements Iterable<E> {
     }
 
     // return a random one
-    public E dequeue(){
-        E ret = null;
+    public Item dequeue(){
+        Item ret = null;
         if(n == 0)
             throw new NoSuchElementException();
         int i = StdRandom.uniform(n);
@@ -67,18 +67,18 @@ public class RandomizedQueue <E> implements Iterable<E> {
         return ret;
     }
 
-    public E sample(){
+    public Item sample(){
         if(n == 0)
             throw new NoSuchElementException();
         return objs[StdRandom.uniform(n)];
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator<Item> iterator() {
         return new QueueIterator();
     }
 
-    private class QueueIterator implements Iterator<E> {
+    private class QueueIterator implements Iterator<Item> {
         private int[] index;
         private int count;
 
@@ -103,7 +103,7 @@ public class RandomizedQueue <E> implements Iterable<E> {
         }
 
         @Override
-        public E next() {
+        public Item next() {
             if(!hasNext())
                 throw new NoSuchElementException();
             count -= 1;
