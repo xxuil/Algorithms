@@ -66,11 +66,6 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Item removeFirst(){
-//        Node temp = first;
-//        Item ret = temp.obj;
-//        temp.next.prev = null;
-//        first = temp.prev;
-//        temp = null;
         if(n > 0){
             Item ret = first.obj;
             first = first.next;
@@ -87,11 +82,6 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Item removeLast(){
-//        Node temp = last;
-//        Item ret = temp.obj;
-//        temp.prev.next = null;
-//        last = temp.prev;
-//        temp = null;
         if(n > 0){
             Item ret = last.obj;
             last = last.prev;
